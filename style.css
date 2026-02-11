@@ -1,0 +1,177 @@
+/* --- Paleta Vintage Realeza --- */
+:root {
+    --pergamino: #e8d5b5;     /* Beige envejecido */
+    --pergamino-dark: #d4bc96; 
+    --lacre: #8b0000;         /* Rojo sello antiguo */
+    --texto: #2c1e14;         /* Marrón casi negro */
+    --dorado: #b39b5d;        /* Dorado apagado */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Times New Roman', serif;
+}
+
+.bg-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* --- El Sobre --- */
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.envelope {
+    position: relative;
+    width: 350px;
+    height: 230px;
+    background-color: var(--pergamino);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    border: 1px solid var(--pergamino-dark);
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-left: 175px solid #dcc6a3;
+    border-top: 115px solid transparent;
+    border-bottom: 115px solid transparent;
+    z-index: 2;
+}
+
+.envelope::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-right: 175px solid #dcc6a3;
+    border-top: 115px solid transparent;
+    border-bottom: 115px solid transparent;
+    z-index: 2;
+}
+
+.top-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-left: 175px solid transparent;
+    border-right: 175px solid transparent;
+    border-top: 125px solid var(--pergamino-dark);
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 1s ease-in-out;
+}
+
+/* --- El Sello de Lacre Original --- */
+.seal {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65px;
+    height: 65px;
+    background: radial-gradient(circle, var(--lacre) 60%, #600 100%);
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #700;
+}
+
+/* Flor de Lis grabada */
+.seal::after {
+    content: 'O&L';
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+/* --- Animación Apertura --- */
+.open .top-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.open .seal {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* --- Estilos de la Invitación --- */
+.carta-real {
+    background-color: var(--pergamino);
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    width: 90%;
+    max-width: 500px;
+    padding: 20px 60px;
+    border: 1px solid var(--pergamino-dark);
+    box-shadow: 0 0 50px rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+    border-image: radial-gradient(#b39b5d, #e8d5b5) 1;
+}
+
+.royal-emblem {
+    font-size: 40px;
+    color: var(--dorado);
+    margin-bottom: 20px;
+}
+
+.carta-real h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--texto);
+    margin-bottom: 30px;
+}
+
+.carta-real p {
+    font-family: 'EB Garamond', serif; 
+    font-size: 1.1rem;
+    color: var(--texto);
+    line-height: 1.8;
+    letter-spacing: 2px;
+    text-transform: none;
+}
+
+
+.wine-signature {
+    margin-top: 40px;
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+/* Clase para mover el sello dentro de la carta sin cambiar su diseño */
+.seal-posicion {
+    top: auto;        /* Cancela la posición superior del sobre */
+    bottom: 40px;     /* Lo ubica a 40px del borde inferior */
+    right: 40px;      /* Lo ubica a 40px del borde derecho */
+    left: auto;       /* Cancela el centrado horizontal */
+    transform: translateX(0) rotate(-5deg); /* Quita el centrado y da una rotación sutil */
+    position: absolute;
+}
+
+/* Aseguramos que el contenedor de la carta permita posicionamiento absoluto */
+.carta-real {
+    position: relative; 
+    /* El resto de tus estilos de .carta-real se mantienen igual */
+}
